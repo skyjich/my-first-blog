@@ -9,10 +9,21 @@
     </head>
     <body>
         <div class="page-header">
+            <table>
+            <tr>
             {% if user.is_authenticated %}
+                <p class="top-menu">Hello {{user.username}}<small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+
+            {% else %}
+                <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
             {% endif %}
-            <h1><a href="/">Django Girls Blog</a></h1>
+                </tr>
+                <tr>
+                <h1><a href="{% url 'blog.views.post_list' %}">Django Girls Blog</a></h1>
+                </tr>
+            </table>
         </div>
         <div class="content container">
             <div class="row">
